@@ -1,7 +1,12 @@
+'''
+Created by Shubharthak Sangharasha
+@github: shubharthaksangharsha
+'''
+#Import Libraries
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 
-
+#Button Class 
 class Button:
     def __init__(self, pos, width, height, value):
         self.pos = pos 
