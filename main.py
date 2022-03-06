@@ -83,32 +83,36 @@ while True:
         length, _, img  = detector.findDistance(lmList[8][:2], lmList[12][:2], img)  
         x, y = lmList[8][:2]
         if length < 50:
-            for i, button in enumerate(buttonList):
-                if button.checkClick(x, y) and not delayCounter:
-                    myValue = buttonListValues[int(i % 4)][int(i / 4)]
-                    print(myValue) 
-                    if myValue == '=':
-                        myEquation = str(eval(myEquation))
-                    else:
-                        myEquation += myValue                    
+            try:
+                for i, button in enumerate(buttonList):
+                    if button.checkClick(x, y) and not delayCounter:
+                        myValue = buttonListValues[int(i % 4)][int(i / 4)]
+                        print(myValue) 
+                        if myValue == '=':
+                            myEquation = str(eval(myEquation))
+                        else:
+                            myEquation += myValue                    
+                        delayCounter = 1
+                if clear_button.checkClick(x,y) and not delayCounter:
+                    print(clear_button.value)
+                    myEquation = ''
                     delayCounter = 1
-            if clear_button.checkClick(x,y) and not delayCounter:
-                print(clear_button.value)
-                myEquation = ''
-                delayCounter = 1
-            if back_button.checkClick(x,y) and not delayCounter:
-                print(back_button.value)
-                myEquation = myEquation[:len(myEquation) - 1]
-                delayCounter = 1
-            if leftParanthesis.checkClick(x,y) and not delayCounter:
-                print(leftParanthesis.value)
-                myEquation += '('
-                delayCounter = 1
-            if rightParanthesis.checkClick(x,y) and not delayCounter:
-                print(rightParanthesis.value)
-                myEquation += ')'
-                delayCounter = 1
-                
+                if back_button.checkClick(x,y) and not delayCounter:
+                    print(back_button.value)
+                    myEquation = myEquation[:len(myEquation) - 1]
+                    delayCounter = 1
+                if leftParanthesis.checkClick(x,y) and not delayCounter:
+                    print(leftParanthesis.value)
+                    myEquation += '('
+                    delayCounter = 1
+                if rightParanthesis.checkClick(x,y) and not delayCounter:
+                    print(rightParanthesis.value)
+                    myEquation += ')'
+                    delayCounter = 1
+            except Exception as e:
+                myEquation = 'Error'
+                print(e)
+                    
     #Avoid Duplicates 
     if delayCounter:
         delayCounter += 1
